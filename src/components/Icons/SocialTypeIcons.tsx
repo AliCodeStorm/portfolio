@@ -8,11 +8,12 @@ import {
     faInstagram,
     faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 import { cn } from "@/lib/cn"; 
 
 interface SocialLink {
-    icon: any; 
+    icon: IconDefinition; 
     url: string;
     label: string;
 }

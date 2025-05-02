@@ -5,7 +5,6 @@ import { Roboto } from 'next/font/google';
 import "../lib/fontowesome";
 import FooterLayout from "@/components/layout/Footer"
 import ResponsiveNavbar from '@/components/layout/Navbar'
-import { ThemeProvider } from "next-themes";
 
 const roboto = Roboto({
   weight: '800',

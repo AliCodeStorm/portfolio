@@ -100,7 +100,7 @@ function Contact() {
                         <Card className="bg-white/5 border border-gray-600 backdrop-blur-md text-white rounded-2xl p-6 md:p-8 h-full">
                             <CardHeader className="p-0">
                                 <h3 className="text-gray-50 text-2xl font-bold mb-6">Contact Information</h3>
-                                <p className="text-gray-300 mb-8">Let's turn your ideas into reality.</p>
+                                <p className="text-gray-300 mb-8">Let turn your ideas into reality.</p>
                             </CardHeader>
 
                             <CardBody className="space-y-6 p-0">
@@ -199,7 +199,8 @@ function Contact() {
                                             rows={5}
                                             required
                                             className="w-full bg-black/20 border border-gray-500 rounded-lg py-3 px-4 text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                            placeholder="Hello, I'd like to talk about..."
+                                            placeholder={`Hello,I like to talk about...`}
+
                                         />
                                     </div>
 

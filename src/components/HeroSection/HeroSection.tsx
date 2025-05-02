@@ -10,12 +10,12 @@ function ModernHeroSection() {
   return (
     <div className="ml-4 sm:ml-0 relative w-full min-h-screen flex flex-col justify-center overflow-x-hidden">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-        <div className=" w-full md:w-1/2 z-20 order-2 md:order-1 mt-10 md:mt-0">
+        <div className="w-full md:w-1/2 z-20 order-2 md:order-1 mt-10 md:mt-0">
           <LineShadowText
             id="home"
             className="text-lg sm:text-xl md:text-2xl lg:text-[1.5rem] font-bold duration-1000 ease-out hover:text-green-700"
           >
-            Hello, I'm a
+            Hello, I&apos;m a
           </LineShadowText>
 
           <MorphingText
@@ -34,7 +34,6 @@ function ModernHeroSection() {
             Passionate Frontend Developer with strong skills in building responsive and dynamic web applications using React.js, Next.js, HTML, CSS, and JavaScript. Experienced in developing full-stack projects using Node.js, Express, and MongoDB for backend services. Currently expanding knowledge in advanced Next.js and backend optimization. Actively seeking internship opportunities to further enhance skills and contribute to real-world projects.
           </p>
 
-
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8 mt-6 md:mt-10">
             <PulsatingButton className="rounded-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg w-full sm:w-auto px-6 py-2 text-sm sm:text-base">
               View My Work
@@ -46,11 +45,12 @@ function ModernHeroSection() {
           </div>
 
           <SocialIcons className="text-white mt-12" />
-
-          <div className="w-full md:w-1/2 z-10 order-1 md:order-2 flex justify-center md:justify-end mt-10 md:mt-0">
-            <AnimationPic className="relative md:absolute w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] xl:w-[450px] top-0 md:top-1/2 md:-translate-y-1/2 right-0 md:right-10 lg:right-20 xl:right-40" />
-          </div>
         </div>
+        
+        <div className="w-full md:w-1/2 z-10 order-1 md:order-2 flex justify-center md:justify-end mt-10 md:mt-0">
+          <AnimationPic className="relative md:absolute w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] xl:w-[450px] top-0 md:top-1/2 md:-translate-y-1/2 right-0 md:right-10 lg:right-20 xl:right-40" />
+        </div>
+
       </div>
     </div>
   );

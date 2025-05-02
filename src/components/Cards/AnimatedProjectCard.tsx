@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Button } from "../ui/button";
+import Image from 'next/image';
 
 type ProjectCardProps = {
     title: string;
@@ -92,13 +93,15 @@ export default function AnimatedProjectCard({
 
             {/* Card content */}
             <div className="relative z-10 bg-gray-900 flex flex-col md:flex-row h-full">
-                <div className="w-full md:w-1/3 bg-gray-900 overflow-hidden">
-                    <img
+                <div className="w-full md:w-1/3 bg-gray-900 overflow-hidden relative h-64">
+                    <Image
                         src={imageUrl}
                         alt={title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 </div>
+
 
                 <div className="w-full md:w-2/3 p-4 relative">
                     <h3 className="text-xl text-cyan-600 font-bold mb-2 group-hover:text-white transition-colors duration-300">

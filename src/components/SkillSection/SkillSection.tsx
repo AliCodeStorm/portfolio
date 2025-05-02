@@ -20,21 +20,14 @@ import {
     faRobot,
     faBrush
 } from '@fortawesome/free-solid-svg-icons';
-
-function isTouchDevice() {
-    if (typeof window === 'undefined') return false;
-    return (
-        'ontouchstart' in window || 
-        (window.navigator.maxTouchPoints > 0)
-    );
-}
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 const ItemTypes = {
     SKILL_CARD: 'skill_card'
 };
 
 interface SkillItem {
-    icon: any;
+    icon: IconDefinition;
     title: string;
     level: string;
     note: string;
