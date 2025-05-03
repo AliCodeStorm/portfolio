@@ -199,7 +199,7 @@ function Contact() {
                                             rows={5}
                                             required
                                             className="w-full bg-black/20 border border-gray-500 rounded-lg py-3 px-4 text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                                            placeholder={`Hello, I&apos;d like to talk about...`}
+                                            placeholder="Hello,I like to talk about..."
 
 
                                         />
