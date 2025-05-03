@@ -13,10 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import AnimatedProjectCard from "@/components/Cards/AnimatedProjectCard";
 
-// Register GSAP plugin
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
 
 type Project = {
     title: string;
@@ -66,13 +62,18 @@ export default function ProjectsSection() {
         }
     ];
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+    }, []);
 
     const filteredProjects = activeFilter === "all"
         ? projects
         : projects.filter(project => project.category === activeFilter);
 
-
     useEffect(() => {
+
         const ctx = gsap.context(() => {
             ScrollTrigger.batch(".project-card", {
                 start: "top 80%",
@@ -122,7 +123,7 @@ export default function ProjectsSection() {
                             <div className="p-2 space-y-1">
                                 {["all", "frontend", "backend", "fullstack", "ui"].map(filter => (
                                     <button
-                                    suppressHydrationWarning={true}
+                                        suppressHydrationWarning={true}
                                         key={filter}
                                         onClick={() => {
                                             setActiveFilter(filter);

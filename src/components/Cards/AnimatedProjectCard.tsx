@@ -38,40 +38,45 @@ export default function AnimatedProjectCard({
 
         if (!card || !overlay) return;
 
-        const ctx = gsap.context(() => {
-            // Initial state - overlay completely to the right
-            gsap.set(overlay, { x: "100%" });
+        // Set initial overlay position
+        gsap.set(overlay, { x: "100%" });
 
-            // Hover animation
-            card.addEventListener("mouseenter", () => {
-                gsap.to(overlay, {
-                    x: "0%",
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-                gsap.to(card, {
-                    scale: hoverScale,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
+        // Define animation handlers
+        const onEnter = () => {
+            gsap.to(overlay, {
+                x: "0%",
+                duration: 0.5,
+                ease: "power2.out"
             });
-
-            // Mouse leave animation
-            card.addEventListener("mouseleave", () => {
-                gsap.to(overlay, {
-                    x: "100%",
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-                gsap.to(card, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
+            gsap.to(card, {
+                scale: hoverScale,
+                duration: 0.3,
+                ease: "power2.out"
             });
-        }, card);
+        };
 
-        return () => ctx.revert();
+        const onLeave = () => {
+            gsap.to(overlay, {
+                x: "100%",
+                duration: 0.5,
+                ease: "power2.out"
+            });
+            gsap.to(card, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        };
+
+        // Add event listeners
+        card.addEventListener("mouseenter", onEnter);
+        card.addEventListener("mouseleave", onLeave);
+
+        // Clean up listeners on unmount
+        return () => {
+            card.removeEventListener("mouseenter", onEnter);
+            card.removeEventListener("mouseleave", onLeave);
+        };
     }, [hoverScale]);
 
     return (
@@ -101,7 +106,6 @@ export default function AnimatedProjectCard({
                         className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                 </div>
-
 
                 <div className="w-full md:w-2/3 p-4 relative">
                     <h3 className="text-xl text-cyan-600 font-bold mb-2 group-hover:text-white transition-colors duration-300">

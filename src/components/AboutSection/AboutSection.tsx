@@ -10,11 +10,8 @@ import {
     faLaptopCode,
     faHeart
 } from "@fortawesome/free-solid-svg-icons";
-import Image from 'next/image';
-if (typeof window !== "undefined") {
-    gsap.registerPlugin(ScrollTrigger);
-}
 
+import Image from 'next/image';
 export default function AboutSection() {
 
     const sectionRef = useRef<HTMLDivElement>(null);
@@ -25,81 +22,79 @@ export default function AboutSection() {
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
     useEffect(() => {
-        const ctx = gsap.context(() => {
-            if (!sectionRef.current) return;
+        if (typeof window !== "undefined") {
+            // Register gsap plugin only in the browser
+            gsap.registerPlugin(ScrollTrigger);
 
+            const ctx = gsap.context(() => {
+                if (!sectionRef.current) return;
 
-            gsap.set([headingRef.current, subheadingRef.current], {
-                y: 50,
-                opacity: 0
-            });
-            gsap.set(imageRef.current, {
-                x: -100,
-                opacity: 0
-            });
-            gsap.set(contentRef.current, {
-                x: 100,
-                opacity: 0
-            });
-            gsap.set(cardRefs.current, {
-                y: 50,
-                opacity: 0
-            });
+                gsap.set([headingRef.current, subheadingRef.current], {
+                    y: 50,
+                    opacity: 0
+                });
+                gsap.set(imageRef.current, {
+                    x: -100,
+                    opacity: 0
+                });
+                gsap.set(contentRef.current, {
+                    x: 100,
+                    opacity: 0
+                });
+                gsap.set(cardRefs.current, {
+                    y: 50,
+                    opacity: 0
+                });
 
-            ScrollTrigger.create({
-                trigger: sectionRef.current,
-                start: "top 80%",
-                onEnter: () => {
+                ScrollTrigger.create({
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                    onEnter: () => {
+                        const tl = gsap.timeline();
 
-                    const tl = gsap.timeline();
-
-
-                    tl.to([headingRef.current, subheadingRef.current], {
-                        y: 0,
-                        opacity: 1,
-                        duration: 0.8,
-                        stagger: 0.1,
-                        ease: "power3.out"
-                    })
-
-                        .to(imageRef.current, {
-                            x: 0,
-                            opacity: 1,
-                            duration: 0.8,
-                            ease: "back.out(1.2)"
-                        }, "-=0.4")
-
-                        .to(contentRef.current, {
-                            x: 0,
-                            opacity: 1,
-                            duration: 0.8,
-                            ease: "power3.out"
-                        }, "-=0.6")
-
-                        .to(cardRefs.current, {
+                        tl.to([headingRef.current, subheadingRef.current], {
                             y: 0,
                             opacity: 1,
-                            stagger: 0.15,
-                            duration: 0.6,
-                            ease: "circ.out"
-                        }, "-=0.4");
+                            duration: 0.8,
+                            stagger: 0.1,
+                            ease: "power3.out"
+                        })
+                            .to(imageRef.current, {
+                                x: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                ease: "back.out(1.2)"
+                            }, "-=0.4")
+                            .to(contentRef.current, {
+                                x: 0,
+                                opacity: 1,
+                                duration: 0.8,
+                                ease: "power3.out"
+                            }, "-=0.6")
+                            .to(cardRefs.current, {
+                                y: 0,
+                                opacity: 1,
+                                stagger: 0.15,
+                                duration: 0.6,
+                                ease: "circ.out"
+                            }, "-=0.4");
 
+                        gsap.to(imageRef.current, {
+                            y: 20,
+                            duration: 3,
+                            repeat: -1,
+                            yoyo: true,
+                            ease: "sine.inOut",
+                            delay: 1
+                        });
+                    },
+                    once: true
+                });
 
-                    gsap.to(imageRef.current, {
-                        y: 20,
-                        duration: 3,
-                        repeat: -1,
-                        yoyo: true,
-                        ease: "sine.inOut",
-                        delay: 1
-                    });
-                },
-                once: true
-            });
+            }, sectionRef);
 
-        }, sectionRef);
-
-        return () => ctx.revert();
+            return () => ctx.revert();
+        }
     }, []);
 
     const focusAreas = [
