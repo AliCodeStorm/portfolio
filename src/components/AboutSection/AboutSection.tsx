@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react"; // Added useState for client-side rendering
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,10 +10,10 @@ import {
     faLaptopCode,
     faHeart
 } from "@fortawesome/free-solid-svg-icons";
-
 import Image from 'next/image';
-export default function AboutSection() {
 
+export default function AboutSection() {
+    const [isClient, setIsClient] = useState(false); // Track whether we are on the client
     const sectionRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
     const subheadingRef = useRef<HTMLParagraphElement>(null);
@@ -21,8 +21,13 @@ export default function AboutSection() {
     const imageRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
+    // This useEffect ensures the code runs only in the browser
     useEffect(() => {
-        if (typeof window !== "undefined") {
+        setIsClient(true); // Set to true when we're on the client side
+    }, []);
+
+    useEffect(() => {
+        if (isClient) {
             // Register gsap plugin only in the browser
             gsap.registerPlugin(ScrollTrigger);
 
@@ -95,7 +100,7 @@ export default function AboutSection() {
 
             return () => ctx.revert();
         }
-    }, []);
+    }, [isClient]);
 
     const focusAreas = [
         { icon: faCode, title: "FullStack Project Learning", subtitle: "Next.js" },
