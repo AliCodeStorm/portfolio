@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, MotionProps } from "framer-motion";
+import { useState, useEffect } from "react";
 
 interface LineShadowTextProps
   extends Omit<React.HTMLAttributes<HTMLElement>, keyof MotionProps>,
@@ -16,12 +17,24 @@ export function LineShadowText({
   as: Component = "span",
   ...props
 }: LineShadowTextProps) {
+  const [isClient, setIsClient] = useState(false);
   const MotionComponent = motion.create(Component);
-
   const content = typeof children === "string" ? children : null;
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   if (!content) {
     throw new Error("LineShadowText only accepts string content");
+  }
+
+  if (!isClient) {
+    return (
+      <Component className={cn("text-white", className)} {...props}>
+        {content}
+      </Component>
+    );
   }
 
   return (

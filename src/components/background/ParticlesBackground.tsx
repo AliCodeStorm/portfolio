@@ -1,33 +1,48 @@
 'use client';
 
-import { useCallback } from "react";
-import Particles from "react-tsparticles";
-import { loadStarsPreset } from "tsparticles-preset-stars";
+import { useCallback, useEffect, useState } from "react";
 import type { Engine } from "tsparticles-engine";
 
 export default function ParticlesBackground() {
-    const particlesInit = useCallback(async (engine: Engine) => {
-        await loadStarsPreset(engine);
+    const [ParticlesComponent, setParticlesComponent] = useState<any>(null);
+
+    useEffect(() => {
+        const loadParticles = async () => {
+            const { Particles } = await import("react-tsparticles");
+            const { loadStarsPreset } = await import("tsparticles-preset-stars");
+            
+            const particlesInit = async (engine: Engine) => {
+                await loadStarsPreset(engine);
+            };
+
+            setParticlesComponent(() => (
+                <Particles
+                    id="tsparticles"
+                    init={particlesInit}
+                    options={{
+                        preset: "stars", 
+                        background: {
+                            color: {
+                                value: "#0000", 
+                            },
+                        },
+                        fullScreen: {
+                            enable: true,
+                            zIndex: -1,
+                        },
+                        detectRetina: true,
+                        fpsLimit: 120,
+                    }}
+                />
+            ));
+        };
+
+        loadParticles();
     }, []);
 
-    return (
-        <Particles
-            id="tsparticles"
-            init={particlesInit}
-            options={{
-                preset: "stars", 
-                background: {
-                    color: {
-                        value: "#0000", 
-                    },
-                },
-                fullScreen: {
-                    enable: true,
-                    zIndex: -1,
-                },
-                detectRetina: true,
-                fpsLimit: 120,
-            }}
-        />
-    );
+    if (!ParticlesComponent) {
+        return null;
+    }
+
+    return ParticlesComponent;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const morphTime = 1.5;
@@ -137,14 +137,30 @@ const SvgFilters: React.FC = () => (
 export const MorphingText: React.FC<MorphingTextProps> = ({
   texts,
   className,
-}) => (
-  <div
-    className={cn(
-      "relative mx-auto h-16 w-full max-w-screen-md text-center font-sans text-3xl font-bold leading-none [filter:url(#threshold)_blur(0.6px)] md:h-20 lg:text-5xl",
-      className
-    )}
-  >
-    <Texts texts={texts} />
-    <SvgFilters />
-  </div>
-);
+}) => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return (
+      <div className={cn("h-16 md:h-20", className)}>
+        <span>{texts[0]}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        "relative mx-auto h-16 w-full max-w-screen-md text-center font-sans text-3xl font-bold leading-none [filter:url(#threshold)_blur(0.6px)] md:h-20 lg:text-5xl",
+        className
+      )}
+    >
+      <Texts texts={texts} />
+      <SvgFilters />
+    </div>
+  );
+};
