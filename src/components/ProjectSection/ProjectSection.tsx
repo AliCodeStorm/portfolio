@@ -24,6 +24,7 @@ type Project = {
 };
 
 export default function ProjectsSection() {
+    const [isClient, setIsClient] = useState(false);
     const [activeFilter, setActiveFilter] = useState<string>("all");
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -116,17 +117,10 @@ export default function ProjectsSection() {
             tags: ["React", "TypeScript", "Storybook"],
             category: "ui"
         },
-        {
-            title: "UI Component Library",
-            description: "Reusable React components with Storybook",
-            lastUpdated: "2023-08-12",
-            imageUrl: "/reactnative.jpg",
-            tags: ["React", "TypeScript", "Storybook"],
-            category: "ui"
-        },
     ];
 
     useEffect(() => {
+        setIsClient(true);
         if (typeof window !== "undefined") {
             gsap.registerPlugin(ScrollTrigger);
         }
@@ -137,6 +131,7 @@ export default function ProjectsSection() {
         : projects.filter(project => project.category === activeFilter);
 
     useEffect(() => {
+        if (!isClient) return;
 
         const ctx = gsap.context(() => {
             ScrollTrigger.batch(".project-card", {
@@ -160,7 +155,7 @@ export default function ProjectsSection() {
         });
 
         return () => ctx.revert();
-    }, [isFilterOpen]);
+    }, [isFilterOpen, isClient]);
 
     return (
         <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10">

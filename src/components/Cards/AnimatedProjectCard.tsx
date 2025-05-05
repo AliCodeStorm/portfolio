@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { cn } from "@/lib/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,10 +29,17 @@ export default function AnimatedProjectCard({
     overlayColor = "bg-blue-500",
     hoverScale = 1.03,
 }: ProjectCardProps) {
+    const [isClient, setIsClient] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    useEffect(() => {
+        if (!isClient) return;
+
         const card = cardRef.current;
         const overlay = overlayRef.current;
 
@@ -77,7 +84,7 @@ export default function AnimatedProjectCard({
             card.removeEventListener("mouseenter", onEnter);
             card.removeEventListener("mouseleave", onLeave);
         };
-    }, [hoverScale]);
+    }, [hoverScale, isClient]);
 
     return (
         <div

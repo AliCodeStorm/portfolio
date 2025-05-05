@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react"; // Added useState for client-side rendering
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +13,7 @@ import {
 import Image from 'next/image';
 
 export default function AboutSection() {
-    const [isClient, setIsClient] = useState(false); // Track whether we are on the client
+    const [isClient, setIsClient] = useState(false);
     const sectionRef = useRef<HTMLDivElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);
     const subheadingRef = useRef<HTMLParagraphElement>(null);
@@ -21,85 +21,84 @@ export default function AboutSection() {
     const imageRef = useRef<HTMLDivElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-    // This useEffect ensures the code runs only in the browser
     useEffect(() => {
-        setIsClient(true); // Set to true when we're on the client side
+        setIsClient(true);
+        if (typeof window !== "undefined") {
+            gsap.registerPlugin(ScrollTrigger);
+        }
     }, []);
 
     useEffect(() => {
-        if (isClient) {
-            // Register gsap plugin only in the browser
-            gsap.registerPlugin(ScrollTrigger);
+        if (!isClient) return;
 
-            const ctx = gsap.context(() => {
-                if (!sectionRef.current) return;
+        const ctx = gsap.context(() => {
+            if (!sectionRef.current) return;
 
-                gsap.set([headingRef.current, subheadingRef.current], {
-                    y: 50,
-                    opacity: 0
-                });
-                gsap.set(imageRef.current, {
-                    x: -100,
-                    opacity: 0
-                });
-                gsap.set(contentRef.current, {
-                    x: 100,
-                    opacity: 0
-                });
-                gsap.set(cardRefs.current, {
-                    y: 50,
-                    opacity: 0
-                });
+            gsap.set([headingRef.current, subheadingRef.current], {
+                y: 50,
+                opacity: 0
+            });
+            gsap.set(imageRef.current, {
+                x: -100,
+                opacity: 0
+            });
+            gsap.set(contentRef.current, {
+                x: 100,
+                opacity: 0
+            });
+            gsap.set(cardRefs.current, {
+                y: 50,
+                opacity: 0
+            });
 
-                ScrollTrigger.create({
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                    onEnter: () => {
-                        const tl = gsap.timeline();
+            ScrollTrigger.create({
+                trigger: sectionRef.current,
+                start: "top 80%",
+                onEnter: () => {
+                    const tl = gsap.timeline();
 
-                        tl.to([headingRef.current, subheadingRef.current], {
-                            y: 0,
+                    tl.to([headingRef.current, subheadingRef.current], {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        stagger: 0.1,
+                        ease: "power3.out"
+                    })
+                        .to(imageRef.current, {
+                            x: 0,
                             opacity: 1,
                             duration: 0.8,
-                            stagger: 0.1,
+                            ease: "back.out(1.2)"
+                        }, "-=0.4")
+                        .to(contentRef.current, {
+                            x: 0,
+                            opacity: 1,
+                            duration: 0.8,
                             ease: "power3.out"
-                        })
-                            .to(imageRef.current, {
-                                x: 0,
-                                opacity: 1,
-                                duration: 0.8,
-                                ease: "back.out(1.2)"
-                            }, "-=0.4")
-                            .to(contentRef.current, {
-                                x: 0,
-                                opacity: 1,
-                                duration: 0.8,
-                                ease: "power3.out"
-                            }, "-=0.6")
-                            .to(cardRefs.current, {
-                                y: 0,
-                                opacity: 1,
-                                stagger: 0.15,
-                                duration: 0.6,
-                                ease: "circ.out"
-                            }, "-=0.4");
+                        }, "-=0.6")
+                        .to(cardRefs.current, {
+                            y: 0,
+                            opacity: 1,
+                            stagger: 0.15,
+                            duration: 0.6,
+                            ease: "circ.out"
+                        }, "-=0.4");
 
-                        gsap.to(imageRef.current, {
-                            y: 20,
-                            duration: 3,
-                            repeat: -1,
-                            yoyo: true,
-                            ease: "sine.inOut",
-                            delay: 1
-                        });
-                    },
-                    once: true
-                });
+                    gsap.to(imageRef.current, {
+                        y: 20,
+                        duration: 3,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut",
+                        delay: 1
+                    });
+                },
+                once: true
+            });
 
-            }, sectionRef);
+        }, sectionRef);
 
-            return () => ctx.revert();
-        }
+        return () => ctx.revert();
     }, [isClient]);
 
     const focusAreas = [
