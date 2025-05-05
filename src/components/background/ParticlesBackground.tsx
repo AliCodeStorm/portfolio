@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import type { Engine } from "tsparticles-engine";
+import type { FC } from "react";
 
 export default function ParticlesBackground() {
-    const [ParticlesComponent, setParticlesComponent] = useState<any>(null);
+    const [ParticlesComponent, setParticlesComponent] = useState<FC | null>(null);
 
     useEffect(() => {
         const loadParticles = async () => {
