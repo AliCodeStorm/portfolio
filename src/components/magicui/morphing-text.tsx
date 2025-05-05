@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-
 import { cn } from "@/lib/utils";
 
 const morphTime = 1.5;
@@ -67,6 +66,8 @@ const useMorphingText = (texts: string[]) => {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return; 
+
     let animationFrameId: number;
 
     const animate = () => {

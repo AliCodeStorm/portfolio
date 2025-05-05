@@ -6,6 +6,7 @@ import "../lib/fontowesome";
 import FooterLayout from "@/components/layout/Footer"
 import ResponsiveNavbar from '@/components/layout/Navbar'
 
+
 const roboto = Roboto({
   weight: '800',
   subsets: ['latin'],

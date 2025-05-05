@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from 'framer-motion'; // Import directly from framer-motion
 import { cn } from "@/lib/cn";
 import Link from "next/link";
 
@@ -21,6 +21,16 @@ const navItems: NavItem[] = [
 export default function ResponsiveNavbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(1);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // Ensuring that code runs only on the client-side
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // This will prevent rendering during SSR
+  }
 
   return (
     <>

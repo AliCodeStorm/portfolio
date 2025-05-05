@@ -59,7 +59,71 @@ export default function ProjectsSection() {
             imageUrl: "/reactnative.jpg",
             tags: ["React", "TypeScript", "Storybook"],
             category: "ui"
-        }
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
+        {
+            title: "UI Component Library",
+            description: "Reusable React components with Storybook",
+            lastUpdated: "2023-08-12",
+            imageUrl: "/reactnative.jpg",
+            tags: ["React", "TypeScript", "Storybook"],
+            category: "ui"
+        },
     ];
 
     useEffect(() => {
