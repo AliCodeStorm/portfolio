@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { Engine } from "tsparticles-engine";
+// import type { ReactNode } from "react";
 import dynamic from 'next/dynamic';
 
 const Particles = dynamic(() => import('react-tsparticles').then(mod => mod.Particles), {
@@ -14,7 +15,6 @@ export default function ParticlesBackground() {
     useEffect(() => {
         const loadParticles = async (): Promise<void> => {
             try {
-                const { loadStarsPreset } = await import("tsparticles-preset-stars");
                 setIsLoaded(true);
             } catch (error) {
                 console.error("Failed to load particles:", error);
